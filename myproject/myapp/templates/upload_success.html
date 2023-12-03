@@ -2,33 +2,32 @@
 <html>
 <head>
     <title>Upload Success</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
+    <link href="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/b-2.4.2/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/dt/jq-3.7.0/dt-1.13.8/b-2.4.2/datatables.min.js"></script>
 </head>
 <body>
     <h2>Upload Successful!</h2>
     <p>Your CSV file has been successfully uploaded and processed.</p>
 
-    <!-- Add DataTables table placeholder -->
+    
     <table id="csvDataTable" class="display"></table>
 
     <script>
         $(document).ready(function() {
-            // Assuming csvData is a variable containing your CSV data as an array
+            
             var csvData = JSON.parse('{{ json_data|escapejs }}');
 
-            // Assuming you have a table with the ID 'csvDataTable'
+            
             $('#csvDataTable').DataTable({
                 data: csvData,
                 columns: getDynamicColumns(csvData),
             });
 
             function getDynamicColumns(data) {
-                // Assuming the first row of the CSV file contains headers
+                
                 var headers = Object.keys(data[0]);
 
-                // Generate columns dynamically
+                
                 return headers.map(function(header) {
                     return { title: header, data: header };
                 });
